@@ -15,7 +15,7 @@ BigInt::BigInt(const string str)
     digits = new vector<short>;
     int n = str.size();
     bool positive = 1;
-    int MSD = 0; // Most Significant Digit
+    int MSD = n - 1; // Most Significant Digit
     for (int i = 0; i < n; ++i)
     {
         if (str[i] <= '9' && str[i] >= '1')
@@ -78,49 +78,52 @@ BigInt &BigInt::addition(const BigInt &a1, const BigInt &a2)
 
 BigInt &BigInt::substract(const BigInt &a1, const BigInt &a2)
 {
-    vector<short> *ad;
-    vector<short> *bd;
+    // vector<short> *ad;
+    // vector<short> *bd;
 
-    if (a1.digits->size() > a2.digits->size())
-    {
-        ad = a1.digits;
-        bd = a2.digits;
-    }
-    else
-    {
-        ad = a1.digits;
-        bd = a2.digits;
-    }
-
+    // if (a1.digits->size() > a2.digits->size())
+    // {
+    //     ad = a1.digits;
+    //     bd = a2.digits;
+    // }
+    // else
+    // {
+    //     ad = a1.digits;
+    //     bd = a2.digits;
+    // }
+    int na = a1.digits->size();
+    int nb = a2.digits->size();
     BigInt *c = new BigInt;
+    if (!(*a1.digits)[na - 1] && !(*a1.digits)[na - 1]) // Negative or 0
+        return addition(a1, a2);
 
-    int nb = bd->size();
-    int na = ad->size();
-    int sub = 0, i = 0, carry = 0;
+    // int nb = bd->size();
+    // int na = ad->size();
+    // int sub = 0, i = 0, carry = 0;
 
-    for (; i < nb; ++i)
-    {
-        sub = (*a1.digits)[i] - (*a2.digits)[i] - 0;
-        if (sub < 0)
-        {
-            carry = 1;
-        }
-        else
-            carry = 0;
-        c->digits->push_back(abs(sub));
-    }
+    // for (; i < nb; ++i)
+    // {
+    //     sub = (*a1.digits)[i] - (*a2.digits)[i] - 0;
+    //     if (sub < 0)
+    //     {
+    //         carry = 1;
+    //     }
+    //     else
+    //         carry = 0;
+    //     c->digits->push_back(abs(sub));
+    // }
 
-    for (; i < na; ++i)
-    {
-        sub = (*ad)[i];
-        if (sub < 0)
-        {
-            carry = 1;
-        }
-        else
-            carry = 0;
-        c->digits->push_back(abs(sub));
-    }
+    // for (; i < na; ++i)
+    // {
+    //     sub = (*ad)[i];
+    //     if (sub < 0)
+    //     {
+    //         carry = 1;
+    //     }
+    //     else
+    //         carry = 0;
+    //     c->digits->push_back(abs(sub));
+    // }
     // If negative add a zero to sign
     // while (sub)
     // {
@@ -165,6 +168,7 @@ int BigInt::compare(const BigInt &a, const BigInt &b)
         return 1;
     else if (!(*a.digits)[na - 1] && !(*b.digits)[nb - 1])
         negative = 1;
+
     if (na < nb)
         return -1;
     else if (na > nb)

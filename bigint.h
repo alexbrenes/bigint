@@ -13,9 +13,9 @@ private:
     BigInt &addition(const BigInt &, const BigInt &);
     BigInt &substract(const BigInt &, const BigInt &);
     BigInt operator[](int);
+    static int compare(const BigInt &, const BigInt &);
 
 public:
-    static int compare(const BigInt &, const BigInt &);
     BigInt();
     BigInt(const string);
     BigInt(const BigInt &);
